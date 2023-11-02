@@ -34,7 +34,7 @@ module tt_um_seven_segment_seconds #( parameter MAX_COUNT = 24'd10_000_000 ) (
         // if reset, set counter to 0
         if (reset) begin
             second_counter <= 0;
-            digit <= 0;
+            digit <= 9;
         end else begin
             // if up to 16e6
             if (second_counter == compare) begin
@@ -42,11 +42,11 @@ module tt_um_seven_segment_seconds #( parameter MAX_COUNT = 24'd10_000_000 ) (
                 second_counter <= 0;
 
                 // increment digit
-                digit <= digit + 1'b1;
+                digit <= digit - 1'b1;
 
                 // only count from 0 to 9
-                if (digit == 9)
-                    digit <= 0;
+                if (digit == 0)
+                    digit <= 9;
 
             end else
                 // increment counter
